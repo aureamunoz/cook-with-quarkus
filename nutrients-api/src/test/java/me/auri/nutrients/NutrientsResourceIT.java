@@ -1,4 +1,4 @@
-package org.auri;
+package me.auri.nutrients;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 

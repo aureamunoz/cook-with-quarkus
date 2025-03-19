@@ -1,4 +1,4 @@
-package org.auri;
+package me.auri.recipes;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.CascadeType;

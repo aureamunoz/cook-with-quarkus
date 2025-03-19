@@ -1,4 +1,4 @@
-package org.auri;
+package me.auri.recipes;
 
 import io.restassured.common.mapper.TypeRef;
 import org.junit.jupiter.api.Test;

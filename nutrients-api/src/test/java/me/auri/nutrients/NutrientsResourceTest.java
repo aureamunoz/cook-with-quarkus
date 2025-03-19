@@ -1,7 +1,6 @@
-package org.auri;
+package me.auri.nutrients;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -27,9 +26,9 @@ class NutrientsResourceTest {
 
 //        Spaghetti:200g, Huevo:2 unidades, Panceta:100g, Queso parmesano:50g, Pimienta negra:1 pizca
         List<String> ingredients = Arrays.asList("Spaghetti:200g","Huevo:2 unidades", "Panceta:100g", "Queso parmesano:50g", "Pimienta negra:1 pizca");
-        Nutrient energy = new Nutrient("Energia", 1453.98, "kcal");
-        Nutrient fat = new Nutrient("Grasas", 60.79, "g");
-        Nutrient carbohydrates = new Nutrient("Carbohidratos", 145.229, "g");
+        Nutrient fats = new Nutrient("Fat", 60.8, "g");
+        Nutrient carbohydrates = new Nutrient("Carbohydrates", 151.6, "g");
+        Nutrient proteins = new Nutrient("Protein", 68.4, "g");
 
         NutrientsResponse nutrientsResponse = given()
                 .header("Content-Type", "application/json")
@@ -41,7 +40,7 @@ class NutrientsResourceTest {
 
         assertThat(nutrientsResponse.getCalories()).isEqualTo(1454);
         assertThat(nutrientsResponse.getHealthLabels()).contains(NutrientsResponse.HealthLabel.NO_SUGAR_ADDED);
-        assertThat(nutrientsResponse.getNutrients()).containsAnyOf(energy,fat,carbohydrates);
+        assertThat(nutrientsResponse.getNutrients()).containsAnyOf(fats,proteins,carbohydrates);
     }
 
 }

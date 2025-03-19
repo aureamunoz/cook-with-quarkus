@@ -1,4 +1,4 @@
-package org.auri;
+package me.auri.nutrients;
 
 import java.util.List;
 
@@ -8,6 +8,12 @@ public class NutrientsResponse {
     private List<HealthLabel> healthLabels;
 
     private List<Nutrient> nutrients;
+
+    public NutrientsResponse(int calories, List<HealthLabel> healthLabels, List<Nutrient> nutrients) {
+        this.calories = calories;
+        this.healthLabels = healthLabels;
+        this.nutrients = nutrients;
+    }
 
     public int getCalories() {
         return calories;

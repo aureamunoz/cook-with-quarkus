@@ -1,4 +1,4 @@
-package org.auri;
+package me.auri.recipes;
 
 import io.quarkus.logging.Log;
 import io.smallrye.common.annotation.RunOnVirtualThread;
