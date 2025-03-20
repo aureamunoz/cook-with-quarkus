@@ -2,14 +2,14 @@ package me.auri.nutrients;
 
 import java.util.List;
 
-public class NutrionFactsResponse {
+public class NutritionFactsResponse {
 
     private int totalCalories;
     private List<HealthLabel> healthLabels;
 
     private List<Nutrient> nutrients;
 
-    public NutrionFactsResponse(int calories, List<HealthLabel> healthLabels, List<Nutrient> nutrients) {
+    public NutritionFactsResponse(int calories, List<HealthLabel> healthLabels, List<Nutrient> nutrients) {
         this.totalCalories = calories;
         this.healthLabels = healthLabels;
         this.nutrients = nutrients;

@@ -30,16 +30,16 @@ class NutrientsResourceTest {
         Nutrient carbohydrates = new Nutrient("Carbohydrates", 151.6, "g");
         Nutrient proteins = new Nutrient("Protein", 68.4, "g");
 
-        NutrionFactsResponse nutrientsResponse = given()
+        NutritionFactsResponse nutrientsResponse = given()
                 .header("Content-Type", "application/json")
                 .body(ingredients)
                 .post("/nutrients")
                 .then()
                 .statusCode(200)
-                .extract().body().as(NutrionFactsResponse.class);
+                .extract().body().as(NutritionFactsResponse.class);
 
         assertThat(nutrientsResponse.getTotalCalories()).isEqualTo(1454);
-        assertThat(nutrientsResponse.getHealthLabels()).contains(NutrionFactsResponse.HealthLabel.NO_SUGAR_ADDED);
+        assertThat(nutrientsResponse.getHealthLabels()).contains(NutritionFactsResponse.HealthLabel.NO_SUGAR_ADDED);
         assertThat(nutrientsResponse.getNutrients()).containsAnyOf(fats,proteins,carbohydrates);
     }
 

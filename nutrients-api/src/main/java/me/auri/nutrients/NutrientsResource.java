@@ -29,7 +29,7 @@ public class NutrientsResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public NutrionFactsResponse getNutrientsDetails(List<String> ingredients) {
+    public NutritionFactsResponse getNutrientsDetails(List<String> ingredients) {
 //        Nutrient energy = new Nutrient("Energia", 1453.98, "kcal");
 //        Nutrient fat = new Nutrient("Grasas", 60.79, "g");
 //        Nutrient carbohydrates = new Nutrient("Carbohidratos", 145.229, "g");
