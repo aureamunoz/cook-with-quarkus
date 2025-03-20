@@ -7,7 +7,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Path("/nutrients")
@@ -24,13 +23,13 @@ public class NutrientsResource {
     }
 
     @GET
-    public List<NutrientInfo> getAll() {
+    public List<NutritionalInfo> getAll() {
         return nutrientRepository.getAll();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public NutrientsResponse getNutrientsDetails(List<String> ingredients) {
+    public NutrionFactsResponse getNutrientsDetails(List<String> ingredients) {
 //        Nutrient energy = new Nutrient("Energia", 1453.98, "kcal");
 //        Nutrient fat = new Nutrient("Grasas", 60.79, "g");
 //        Nutrient carbohydrates = new Nutrient("Carbohidratos", 145.229, "g");
