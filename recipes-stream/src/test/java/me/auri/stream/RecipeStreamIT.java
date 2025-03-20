@@ -1,8 +1,8 @@
-package me.auri.demo;
+package me.auri.stream;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 @QuarkusIntegrationTest
-class GreetingResourceIT extends GreetingResourceTest {
+class RecipeStreamIT extends RecipeStreamTest {
     // Execute the same tests but in packaged mode.
 }

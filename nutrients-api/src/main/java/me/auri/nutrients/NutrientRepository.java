@@ -148,6 +148,7 @@ public class NutrientRepository {
                 List.of( NutrientsResponse.HealthLabel.VEGETARIAN, NutrientsResponse.HealthLabel.GLUTEN_FREE)));
     }
 
+
     public NutrientsResponse nutritionFacts(List<String> ingredients) {
         int totalCalories = 0;
         Map<String, Nutrient> nutrientMap = new HashMap<>();
@@ -176,6 +177,10 @@ public class NutrientRepository {
         List<Nutrient> totalNutrients = new ArrayList<>(nutrientMap.values());
 
         return new NutrientsResponse(totalCalories, new ArrayList<>(totalHealthLabels), totalNutrients);
+    }
+
+    public List<NutrientInfo> getAll() {
+        return nutrientDatabase.values().stream().toList();
     }
 
 

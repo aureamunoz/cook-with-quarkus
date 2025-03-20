@@ -17,9 +17,15 @@ public class NutrientsResource {
     NutrientRepository nutrientRepository;
 
     @GET
+    @Path("/hello")
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
         return "Hello from Nutrients API REST";
+    }
+
+    @GET
+    public List<NutrientInfo> getAll() {
+        return nutrientRepository.getAll();
     }
 
     @POST
