@@ -51,9 +51,9 @@ public class RecipeService {
     }
 
     private String formatNutrients(List<TheNutritionFactsService.NutrientInfo.Nutrient> nutrients) {
-        StringBuilder sb = new StringBuilder("Información nutricional:\n");
+        StringBuilder sb = new StringBuilder();
         for (TheNutritionFactsService.NutrientInfo.Nutrient nutrient : nutrients) {
-            sb.append(nutrient.toString()).append("\n");
+            sb.append(nutrient.toString()).append(" ");
         }
         return sb.toString();
     }

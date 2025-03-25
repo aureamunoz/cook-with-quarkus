@@ -20,20 +20,34 @@
         table {
             border: none;
         }
+
+        #recipes table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #recipes th, #recipes td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        #recipes th {
+            background-color: #f4f4f4;
+        }
+
     </style>
 </head>
 
 <body>
 <header>
-    <h1>Mi Recetario</h1>
-    <p>Mis recetas <mark>favoritas</mark> </p>
+    <img src="quarkus_icon_rgb_256px_default.png" alt="Logo" class="logo">
+    <h1>Cook with Quarkus</h1>
 </header>
 <main>
     <hr>
     <section id="recipes">
-        <header>
-            <h2>Recetas</h2>
-        </header>
     </section>
 </main>
 </body>
@@ -55,17 +69,14 @@
         return fetch('/recipes')
             .then(response => response.json())
             .then(data => {
-                document.querySelectorAll("#recipes aside").forEach(el => el.remove());
-                //public record Recipe(String name, String description, String ingredients, String instructions, int rating, int calories, String healthLabels, String nutrients) {
+                document.querySelectorAll("#recipes div").forEach(el => el.remove());
 
                 data.forEach(
                     recipe => {
-                        let element = document.createElement("aside");
+                        let element = document.createElement("div");
                         let table = document.createElement("table");
                         let row = document.createElement("tr");
                         let left = document.createElement("td");
-                        // let right = document.createElement("td");
-                        // let img = document.createElement("img");
                         let name = document.createElement("h3");
                         let description = document.createElement("p");
                         let ingredients = document.createElement("p");
@@ -75,16 +86,14 @@
                         let healthLabels = document.createElement("p");
                         let nutrients = document.createElement("p");
                         left.setAttribute("class", "right");
-                        name.appendChild(document.createTextNode(recipe.name));
+                        name.innerHTML = "<strong style='color: #4695eb;'>" + recipe.name;
                         description.appendChild(document.createTextNode(recipe.description));
-                        ingredients.appendChild(document.createTextNode("Ingredientes: " + recipe.ingredients));
-                        instructions.appendChild(document.createTextNode("Instrucciones: " + recipe.instructions));
-                        ranking.appendChild(document.createTextNode("Rating: " + recipe.rating));
-                        totalCalories.appendChild(document.createTextNode("Calorias: " + recipe.calories));
+                        ingredients.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Ingredientes:</span> " + recipe.ingredients;
+                        instructions.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Instrucciones:</span> " + recipe.instructions;
+                        ranking.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Valoración:</span> " + recipe.rating;
+                        totalCalories.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Calorías:</span> " + recipe.calories;
+                        nutrients.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Información nutricional:</span><br>" + recipe.nutrients;
                         healthLabels.appendChild(document.createTextNode( recipe.healthLabels));
-                        nutrients.appendChild(document.createTextNode("Nutrientes: " + recipe.nutrients));
-                        // year.appendChild(document.createTextNode("Year: " + recipe.year));
-                        // img.setAttribute("src", recipe.cover);
                         left.appendChild(name);
                         left.appendChild(description);
                         left.appendChild(ingredients);
@@ -93,10 +102,7 @@
                         left.appendChild(totalCalories);
                         left.appendChild(healthLabels);
                         left.appendChild(nutrients);
-                        // right.append(year);
                         row.appendChild(left);
-                        // row.appendChild(right);
-                        // left.appendChild(img);
                         table.appendChild(row);
                         element.appendChild(table)
                         document.getElementById("recipes").appendChild(element);
@@ -104,6 +110,11 @@
                 )
             });
     }
+
+    function formatNutrients(nutrients) {
+        return nutrients.replace(/(\d+\.?\d*\s?[a-zA-Z]*)\s/g, "$1\n");
+    }
+
 
 </script>
 

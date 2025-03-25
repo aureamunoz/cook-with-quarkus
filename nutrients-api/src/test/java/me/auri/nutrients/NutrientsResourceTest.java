@@ -39,7 +39,7 @@ class NutrientsResourceTest {
                 .extract().body().as(NutritionFactsResponse.class);
 
         assertThat(nutrientsResponse.getTotalCalories()).isEqualTo(1454);
-        assertThat(nutrientsResponse.getHealthLabels()).contains(NutritionFactsResponse.HealthLabel.NO_SUGAR_ADDED);
+        assertThat(nutrientsResponse.getHealthLabels()).contains(NutritionFactsResponse.HealthLabel.NO_SUGAR_ADDED.getLabel());
         assertThat(nutrientsResponse.getNutrients()).containsAnyOf(fats,proteins,carbohydrates);
     }
 

@@ -5,11 +5,11 @@ import java.util.List;
 public class NutritionFactsResponse {
 
     private int totalCalories;
-    private List<HealthLabel> healthLabels;
+    private List<String> healthLabels;
 
     private List<Nutrient> nutrients;
 
-    public NutritionFactsResponse(int calories, List<HealthLabel> healthLabels, List<Nutrient> nutrients) {
+    public NutritionFactsResponse(int calories, List<String> healthLabels, List<Nutrient> nutrients) {
         this.totalCalories = calories;
         this.healthLabels = healthLabels;
         this.nutrients = nutrients;
@@ -23,11 +23,11 @@ public class NutritionFactsResponse {
         this.totalCalories = totalCalories;
     }
 
-    public List<HealthLabel> getHealthLabels() {
+    public List<String> getHealthLabels() {
         return healthLabels;
     }
 
-    public void setHealthLabels(List<HealthLabel> healthLabels) {
+    public void setHealthLabels(List<String> healthLabels) {
         this.healthLabels = healthLabels;
     }
 
@@ -50,6 +50,10 @@ public class NutritionFactsResponse {
 
         HealthLabel(String label) {
             this.label = label;
+        }
+
+        public String getLabel() {
+            return label;
         }
     }
 }
