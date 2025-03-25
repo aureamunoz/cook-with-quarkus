@@ -42,12 +42,12 @@ public class RecipeService {
 
     private Recipe enrich(Recipe recipe) {
         var resp = service.analyze(recipe.ingredients());
-        for (var result : resp.results) {
-            String healthLabels = result.healthLabels.stream().collect(Collectors.joining(", "));
-            String nutrients = formatNutrients(result.nutrients);
-            return new Recipe(recipe.name(), recipe.description(),recipe.ingredients(), recipe.instructions(), recipe.rating(),result.calories, healthLabels, nutrients);
-        }
-        return recipe;
+        Log.infof(recipe.name() + " enriched: ");
+        String healthLabels = resp.healthLabels.stream().collect(Collectors.joining(", "));
+        Log.info("HealthLabels: " + healthLabels);
+        String nutrients = formatNutrients(resp.nutrients);
+        Log.info(nutrients);
+        return new Recipe(recipe.name(), recipe.description(),recipe.ingredients(), recipe.instructions(), recipe.rating(),resp.calories, healthLabels, nutrients);
     }
 
     private String formatNutrients(List<TheNutritionFactsService.NutrientInfo.Nutrient> nutrients) {

@@ -1,13 +1,16 @@
 package me.auri.nutrients;
 
+import io.quarkus.logging.Log;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/nutrients")
 public class NutrientsResource {
@@ -29,15 +32,8 @@ public class NutrientsResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public NutritionFactsResponse getNutrientsDetails(List<String> ingredients) {
-//        Nutrient energy = new Nutrient("Energia", 1453.98, "kcal");
-//        Nutrient fat = new Nutrient("Grasas", 60.79, "g");
-//        Nutrient carbohydrates = new Nutrient("Carbohidratos", 145.229, "g");
-//        List<Nutrient> nutrients = Arrays.asList(energy,fat,carbohydrates);
-//        List<NutrientsResponse.HealthLabel> labels = Arrays.asList(NutrientsResponse.HealthLabel.NO_SUGAR_ADDED);
-//        NutrientsResponse nutrientsResponse = new NutrientsResponse(1454,labels,nutrients);
-//        return nutrientsResponse;
-
+    public NutritionFactsResponse getNutrientsDetails(@QueryParam("ingredients")String ingredients) {
+        Log.infof("Ingredients received:  %s", ingredients);
         return nutrientRepository.nutritionFacts(ingredients);
 
     }

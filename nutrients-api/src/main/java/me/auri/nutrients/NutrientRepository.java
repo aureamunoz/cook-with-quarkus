@@ -1,5 +1,7 @@
 package me.auri.nutrients;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.quarkus.logging.Log;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -149,13 +151,14 @@ public class NutrientRepository {
     }
 
 
-    public NutritionFactsResponse nutritionFacts(List<String> ingredients) {
+    public NutritionFactsResponse nutritionFacts(String ingredients) {
         int totalCalories = 0;
         Map<String, Nutrient> nutrientMap = new HashMap<>();
         Set<NutritionFactsResponse.HealthLabel> totalHealthLabels = new HashSet<>();
-
-        for (String item : ingredients) {
-            String[] ingredient = item.split(":");
+        String[] splitted = ingredients.split(",");
+        for(int i = 0; i < splitted.length; i++){
+            String[] ingredient = splitted[i].trim().split(":");
+            Log.info(" ----- Analizing " + ingredient[0]);
             NutritionalInfo info = nutrientDatabase.get(ingredient[0].toLowerCase());
             if (info != null) {
                 totalCalories += info.calories();
@@ -175,8 +178,8 @@ public class NutrientRepository {
             }
         }
         List<Nutrient> totalNutrients = new ArrayList<>(nutrientMap.values());
-
-        return new NutritionFactsResponse(totalCalories, new ArrayList<>(totalHealthLabels), totalNutrients);
+        NutritionFactsResponse nutritionFactsResponse = new NutritionFactsResponse(totalCalories, new ArrayList<>(totalHealthLabels), totalNutrients);
+        return nutritionFactsResponse;
     }
 
     public List<NutritionalInfo> getAll() {

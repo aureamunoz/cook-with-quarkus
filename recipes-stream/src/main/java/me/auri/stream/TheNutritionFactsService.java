@@ -3,6 +3,7 @@ package me.auri.stream;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
 import org.eclipse.microprofile.faulttolerance.Retry;
@@ -16,19 +17,14 @@ import java.util.List;
 @RegisterRestClient(baseUri = "http://localhost:8083/nutrients")
 public interface TheNutritionFactsService {
 
-    @GET
+    @POST
     @Retry(maxRetries = 4, delay = 1, delayUnit = ChronoUnit.SECONDS)
     @Timeout(1000)
-    NutritionFactsResponse analyze(@QueryParam("ingredients") String ingredients);
-
-
-    class NutritionFactsResponse {
-        public List<NutrientInfo> results;
-    }
+    NutrientInfo analyze(@QueryParam("ingredients") String ingredients);
 
     public class NutrientInfo {
 
-        @JsonProperty("calories")
+        @JsonProperty("totalCalories")
         public int calories;
 
         @JsonProperty("healthLabels")
