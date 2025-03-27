@@ -45,7 +45,7 @@
     </build>
 
     <modules>
-        <module>nutrients-picture-api</module>
+        <module>recipes-enhancer</module>
         <module>recipes-api</module>
         <module>recipes-stream</module>
     </modules>

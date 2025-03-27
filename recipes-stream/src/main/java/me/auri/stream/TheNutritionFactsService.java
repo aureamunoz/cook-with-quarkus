@@ -20,7 +20,7 @@ public interface TheNutritionFactsService {
     @POST
     @Retry(maxRetries = 4, delay = 1, delayUnit = ChronoUnit.SECONDS)
     @Timeout(1000)
-    NutrientInfo analyze(String ingredients);
+    NutrientInfo analyze(@QueryParam("recipe") String recipeName, @QueryParam("ingredients") String ingredients);
 
     public class NutrientInfo {
 
