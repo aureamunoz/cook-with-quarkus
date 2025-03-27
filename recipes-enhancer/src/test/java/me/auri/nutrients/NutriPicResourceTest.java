@@ -21,14 +21,15 @@ class NutriPicResourceTest {
     @Test
     void testNutrientsDetailsEndpoint() {
         String ingredients= "Spaghetti:200g, Huevo:2 unidades, Panceta:100g, Queso parmesano:50g, Pimienta negra:1 pizca";
+        RecipeDetails recipeDetails = new RecipeDetails("Spaghetti Carbonara", ingredients);
         Nutrient fats = new Nutrient("Grasas", 60.8, "g");
         Nutrient carbohydrates = new Nutrient("Hidratos de Carbono", 151.6, "g");
         Nutrient proteins = new Nutrient("Proteinas", 68.4, "g");
 
         NutriPicResponse nutrientsResponse = given()
                 .header("Content-Type", "application/json")
-//                .body(ingredients)
-                .post("/nutripic?recipe=Pizza Margarita&ingredients="+ingredients)
+                .body(recipeDetails)
+                .post("/nutripic")
                 .then()
                 .statusCode(200)
                 .extract().body().as(NutriPicResponse.class);

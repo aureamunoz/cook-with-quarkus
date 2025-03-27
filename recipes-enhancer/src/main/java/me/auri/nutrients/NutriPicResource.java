@@ -33,10 +33,10 @@ public class NutriPicResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public NutriPicResponse getNutrientsAndPicture(@QueryParam("recipe")String recipe, @QueryParam("ingredients") String ingredients) throws IOException, URISyntaxException {
-        Log.infof("Marchando %s!! ", recipe);
-        final NutriPicResponse nutriPicResponse = nutriPicEnhancer.nutritionFacts(ingredients);
-        nutriPicResponse.setPicture(nutriPicEnhancer.getPic(recipe));
+    public NutriPicResponse getNutrientsAndPicture(RecipeDetails details) throws IOException, URISyntaxException {
+        Log.infof("Marchando %s!! ", details.name());
+        final NutriPicResponse nutriPicResponse = nutriPicEnhancer.nutritionFacts(details.ingredients());
+        nutriPicResponse.setPicture(nutriPicEnhancer.getPic(details.name()));
         return nutriPicResponse;
     }
 
