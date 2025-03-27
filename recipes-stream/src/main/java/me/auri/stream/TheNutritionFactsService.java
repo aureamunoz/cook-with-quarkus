@@ -14,13 +14,13 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-@RegisterRestClient(baseUri = "http://localhost:8083/nutrients")
+@RegisterRestClient(baseUri = "http://localhost:8083/nutripic")
 public interface TheNutritionFactsService {
 
     @POST
     @Retry(maxRetries = 4, delay = 1, delayUnit = ChronoUnit.SECONDS)
     @Timeout(1000)
-    NutrientInfo analyze(@QueryParam("recipe") String recipeName, @QueryParam("ingredients") String ingredients);
+    NutrientInfo analyze(RecipeDetails nutritionQuery);
 
     public class NutrientInfo {
 

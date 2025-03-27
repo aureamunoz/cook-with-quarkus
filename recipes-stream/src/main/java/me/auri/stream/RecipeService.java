@@ -41,7 +41,7 @@ public class RecipeService {
     }
 
     private Recipe enrich(Recipe recipe) {
-        var resp = service.analyze(recipe.name(),recipe.ingredients());
+        var resp = service.analyze(new RecipeDetails(recipe.name(), recipe.ingredients()));
         Log.infof(recipe.name() + " enriched: ");
         String healthLabels = resp.healthLabels.stream().collect(Collectors.joining(", "));
         Log.info("HealthLabels: " + healthLabels);

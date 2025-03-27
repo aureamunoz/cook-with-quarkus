@@ -112,7 +112,7 @@ Spring, the Quarkus way! Start your REST Web Services with a Spring Controller.
 }
 
 {
-"name": "Ensalada César",
+"name": "Ensalada Cesar",
 "description": "Ensalada fresca con lechuga, pollo y aderezo César.",
 "instructions": "Mezclar lechuga, pollo, crutones y aderezo. Servir con queso rallado.",
 "rating": 4,
