@@ -20,7 +20,7 @@ public interface TheNutritionFactsService {
     @POST
     @Retry(maxRetries = 4, delay = 1, delayUnit = ChronoUnit.SECONDS)
     @Timeout(1000)
-    NutrientInfo analyze(@QueryParam("ingredients") String ingredients);
+    NutrientInfo analyze(String ingredients);
 
     public class NutrientInfo {
 
@@ -32,6 +32,9 @@ public interface TheNutritionFactsService {
 
         @JsonProperty("nutrients")
         public List<Nutrient> nutrients;
+
+        @JsonProperty("picture")
+        public String picture;
 
         public static class Nutrient {
             @JsonProperty("label")

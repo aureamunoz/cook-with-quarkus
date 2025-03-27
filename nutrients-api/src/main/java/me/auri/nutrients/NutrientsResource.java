@@ -9,6 +9,11 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,9 +37,10 @@ public class NutrientsResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public NutritionFactsResponse getNutrientsDetails(@QueryParam("ingredients")String ingredients) {
+    public NutritionFactsResponse getNutrientsDetails(String ingredients) throws IOException, URISyntaxException {
         Log.infof("Ingredients received:  %s", ingredients);
         return nutrientRepository.nutritionFacts(ingredients);
-
     }
+
+
 }

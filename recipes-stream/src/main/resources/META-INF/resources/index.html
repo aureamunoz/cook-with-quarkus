@@ -77,6 +77,7 @@
                         let table = document.createElement("table");
                         let row = document.createElement("tr");
                         let left = document.createElement("td");
+                        let right = document.createElement("td");
                         let name = document.createElement("h3");
                         let description = document.createElement("p");
                         let ingredients = document.createElement("p");
@@ -85,9 +86,13 @@
                         let totalCalories = document.createElement("p");
                         let healthLabels = document.createElement("p");
                         let nutrients = document.createElement("p");
+                        let image = document.createElement("div");
                         left.setAttribute("class", "right");
+                        right.setAttribute("class", "right");
                         name.innerHTML = "<strong style='color: #4695eb;'>" + recipe.name;
                         description.appendChild(document.createTextNode(recipe.description));
+                        // ingredients.innerHTML = "<div class='image'><img src='data:image/jpg;base64,'/></div>" + recipe.ingredients;
+                        image.innerHTML="<img src='data:image/jpg;base64,"+recipe.image+"'/>";
                         ingredients.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Ingredientes:</span> " + recipe.ingredients;
                         instructions.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Instrucciones:</span> " + recipe.instructions;
                         ranking.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Valoración:</span> " + recipe.rating;
@@ -102,7 +107,9 @@
                         left.appendChild(totalCalories);
                         left.appendChild(healthLabels);
                         left.appendChild(nutrients);
+                        right.appendChild(image);
                         row.appendChild(left);
+                        row.appendChild(right);
                         table.appendChild(row);
                         element.appendChild(table)
                         document.getElementById("recipes").appendChild(element);

@@ -2,10 +2,19 @@ package me.auri.nutrients;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.logging.Log;
+import io.quarkus.runtime.util.ClassPathUtils;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -152,14 +161,14 @@ public class NutrientRepository {
     }
 
 
-    public NutritionFactsResponse nutritionFacts(String ingredients) {
+    public NutritionFactsResponse nutritionFacts(String ingredients) throws IOException, URISyntaxException {
         int totalCalories = 0;
         Map<String, Nutrient> nutrientMap = new HashMap<>();
         Set<String> totalHealthLabels = new HashSet<>();
         String[] splitted = ingredients.split(",");
         for(int i = 0; i < splitted.length; i++){
             String[] ingredient = splitted[i].trim().split(":");
-            Log.info(" ----- Analizing " + ingredient[0]);
+//            Log.info(" ----- Analizing " + ingredient[0]);
             NutritionalInfo info = nutrientDatabase.get(ingredient[0].toLowerCase());
             if (info != null) {
                 totalCalories += info.calories();
@@ -179,8 +188,33 @@ public class NutrientRepository {
             }
         }
         List<Nutrient> totalNutrients = new ArrayList<>(nutrientMap.values());
-        NutritionFactsResponse nutritionFactsResponse = new NutritionFactsResponse(totalCalories, new ArrayList<>(totalHealthLabels), totalNutrients);
+        String image = convertImageToBase64("pizza.jpg");
+        NutritionFactsResponse nutritionFactsResponse = new NutritionFactsResponse(totalCalories, new ArrayList<>(totalHealthLabels), totalNutrients, image);
         return nutritionFactsResponse;
+    }
+
+    private String convertImageToBase64(String imagePath) throws IOException, URISyntaxException {
+        File imageFile = getFileFromResources(imagePath);
+        if (imageFile.exists()) {
+            FileInputStream fileInputStream = new FileInputStream(imageFile);
+            byte[] imageData = new byte[(int) imageFile.length()];
+            fileInputStream.read(imageData);
+            fileInputStream.close();
+            return Base64.getEncoder().encodeToString(imageData);
+        } else {
+            throw new IOException("Image file not found: " + imagePath);
+        }
+    }
+
+    public  File getFileFromResources(String fileName) throws URISyntaxException {
+        URL resource = Thread.currentThread().getContextClassLoader().getResource(fileName);
+        if (resource == null) {
+            throw new IllegalArgumentException("file not found!");
+        } else {
+            return new File(resource.toURI());
+        }
+
+
     }
 
     public List<NutritionalInfo> getAll() {

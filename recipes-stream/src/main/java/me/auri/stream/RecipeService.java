@@ -47,7 +47,7 @@ public class RecipeService {
         Log.info("HealthLabels: " + healthLabels);
         String nutrients = formatNutrients(resp.nutrients);
         Log.info(nutrients);
-        return new Recipe(recipe.name(), recipe.description(),recipe.ingredients(), recipe.instructions(), recipe.rating(),resp.calories, healthLabels, nutrients);
+        return new Recipe(recipe.name(), recipe.description(),recipe.ingredients(), recipe.instructions(), recipe.rating(),resp.calories, healthLabels, nutrients, resp.picture);
     }
 
     private String formatNutrients(List<TheNutritionFactsService.NutrientInfo.Nutrient> nutrients) {

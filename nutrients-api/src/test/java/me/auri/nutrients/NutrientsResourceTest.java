@@ -25,10 +25,11 @@ class NutrientsResourceTest {
     void testNutrientsDetailsEndpoint() {
 
 //        Spaghetti:200g, Huevo:2 unidades, Panceta:100g, Queso parmesano:50g, Pimienta negra:1 pizca
-        List<String> ingredients = Arrays.asList("Spaghetti:200g","Huevo:2 unidades", "Panceta:100g", "Queso parmesano:50g", "Pimienta negra:1 pizca");
-        Nutrient fats = new Nutrient("Fat", 60.8, "g");
-        Nutrient carbohydrates = new Nutrient("Carbohydrates", 151.6, "g");
-        Nutrient proteins = new Nutrient("Protein", 68.4, "g");
+//        List<String> ingredients = Arrays.asList("Spaghetti:200g","Huevo:2 unidades", "Panceta:100g", "Queso parmesano:50g", "Pimienta negra:1 pizca");
+        String ingredients= "Spaghetti:200g, Huevo:2 unidades, Panceta:100g, Queso parmesano:50g, Pimienta negra:1 pizca";
+        Nutrient fats = new Nutrient("Grasas", 60.8, "g");
+        Nutrient carbohydrates = new Nutrient("Hidratos de Carbono", 151.6, "g");
+        Nutrient proteins = new Nutrient("Proteinas", 68.4, "g");
 
         NutritionFactsResponse nutrientsResponse = given()
                 .header("Content-Type", "application/json")
@@ -41,6 +42,7 @@ class NutrientsResourceTest {
         assertThat(nutrientsResponse.getTotalCalories()).isEqualTo(1454);
         assertThat(nutrientsResponse.getHealthLabels()).contains(NutritionFactsResponse.HealthLabel.NO_SUGAR_ADDED.getLabel());
         assertThat(nutrientsResponse.getNutrients()).containsAnyOf(fats,proteins,carbohydrates);
+        assertThat(nutrientsResponse.getPicture()).isNotEmpty();
     }
 
 }

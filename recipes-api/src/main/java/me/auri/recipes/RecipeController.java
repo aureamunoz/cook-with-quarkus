@@ -3,6 +3,7 @@ package me.auri.recipes;
 import io.quarkus.logging.Log;
 import io.smallrye.common.annotation.RunOnVirtualThread;
 import io.smallrye.reactive.messaging.MutinyEmitter;
+import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.reactive.messaging.Channel;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,6 +22,9 @@ public class RecipeController {
 
     @Channel("recipes")
     MutinyEmitter<Recipe> emitter;
+
+    @Inject
+    CookAiService cookAiService;
 
     @GetMapping("/recipes")
     public List<Recipe> getAll(){
@@ -46,6 +51,12 @@ public class RecipeController {
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
+    }
+
+    @PostMapping("/new")
+    public Recipe cookSomethingWith(@RequestParam String ingredients){
+        Log.infof("Cooking new recipe with: %s ", ingredients);
+        return cookAiService.cookSomethingWith(ingredients);
     }
 
 }
