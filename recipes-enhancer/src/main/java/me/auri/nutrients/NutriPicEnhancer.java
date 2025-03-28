@@ -1,13 +1,12 @@
 package me.auri.nutrients;
 
+import io.quarkus.logging.Log;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -156,7 +155,7 @@ public class NutriPicEnhancer {
     }
 
 
-    public NutriPicResponse nutritionFacts(String ingredients) throws IOException, URISyntaxException {
+    public NutriPicResponse nutritionFacts(String ingredients) {
         int totalCalories = 0;
         Map<String, Nutrient> nutrientMap = new HashMap<>();
         Set<String> totalHealthLabels = new HashSet<>();
@@ -184,39 +183,50 @@ public class NutriPicEnhancer {
         List<Nutrient> totalNutrients = new ArrayList<>(nutrientMap.values());
         NutriPicResponse nutriPicResponse = new NutriPicResponse();
         nutriPicResponse.setTotalCalories(totalCalories);
-        nutriPicResponse.setNutrients(totalNutrients);
-        nutriPicResponse.setHealthLabels(new ArrayList<>(totalHealthLabels));
+        nutriPicResponse.setNutrients(formatNutrients(totalNutrients));
+        nutriPicResponse.setHealthLabels(totalHealthLabels.stream().collect(Collectors.joining(", ")));
+        Log.info("Nutrition Facts: ");
+        Log.infof("Total calories: %s",nutriPicResponse.getTotalCalories());
+        Log.infof("Health labels: %s",nutriPicResponse.getHealthLabels());
+        Log.infof("Nutrients: %s",nutriPicResponse.getNutrients());
         return nutriPicResponse;
     }
 
 
-    public String getPic(String recipeName) throws IOException, URISyntaxException {
-        return convertImageToBase64(recipeName.toLowerCase().trim().replaceAll("\\s+", "")+".jpg");
+    public String getPic(String recipeName) {
+        String base64 = convertImageToBase64(recipeName.toLowerCase().trim().replaceAll("\\s+", "") + ".jpg");
+        if (!base64.isBlank()){
+            Log.infof("Image found for ", recipeName);
+        } else {
+            Log.infof("Image for %s not found", recipeName);
+        }
+        return base64;
 
     }
 
-    private String convertImageToBase64(String imagePath) throws IOException, URISyntaxException {
-        File imageFile = getFileFromResources(imagePath);
-        if (imageFile.exists()) {
-            FileInputStream fileInputStream = new FileInputStream(imageFile);
-            byte[] imageData = new byte[(int) imageFile.length()];
-            fileInputStream.read(imageData);
-            fileInputStream.close();
-            return Base64.getEncoder().encodeToString(imageData);
-        } else {
-            throw new IOException("Image file not found: " + imagePath);
+    private String formatNutrients(List<Nutrient> nutrients) {
+        StringBuilder sb = new StringBuilder();
+        for (Nutrient nutrient : nutrients) {
+            sb.append(nutrient.toString()).append(" ");
         }
+        return sb.toString();
     }
 
-    private File getFileFromResources(String fileName) throws URISyntaxException {
-        URL resource = Thread.currentThread().getContextClassLoader().getResource(fileName);
-        if (resource == null) {
-            throw new IllegalArgumentException("file not found!");
-        } else {
-            return new File(resource.toURI());
+    private String convertImageToBase64(String imagePath)  {
+        try {
+            URL resource = Thread.currentThread().getContextClassLoader().getResource(imagePath);
+            if (resource != null) {
+                File imageFile = new File(resource.toURI());
+                if (imageFile.exists()) {
+                    byte[] imageData = Files.readAllBytes(imageFile.toPath());
+                    return Base64.getEncoder().encodeToString(imageData);
+
+                }
+            }
+        }catch (Exception e) {
+            Log.errorf("Error processing image file %s: %s", imagePath, e.getMessage());
         }
-
-
+        return "";
     }
 
     public List<NutritionalFacts> getAll() {

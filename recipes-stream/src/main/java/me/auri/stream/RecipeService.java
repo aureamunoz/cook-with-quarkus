@@ -4,7 +4,6 @@ import io.quarkus.logging.Log;
 import io.smallrye.common.annotation.RunOnVirtualThread;
 import io.smallrye.reactive.messaging.MutinyEmitter;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -12,7 +11,6 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class RecipeService {
@@ -43,19 +41,7 @@ public class RecipeService {
     private Recipe enrich(Recipe recipe) {
         var resp = service.analyze(new RecipeDetails(recipe.name(), recipe.ingredients()));
         Log.infof(recipe.name() + " enriched: ");
-        String healthLabels = resp.healthLabels.stream().collect(Collectors.joining(", "));
-        Log.info("HealthLabels: " + healthLabels);
-        String nutrients = formatNutrients(resp.nutrients);
-        Log.info(nutrients);
-        return new Recipe(recipe.name(), recipe.description(),recipe.ingredients(), recipe.instructions(), recipe.rating(),resp.calories, healthLabels, nutrients, resp.picture);
-    }
-
-    private String formatNutrients(List<TheNutritionFactsService.NutrientInfo.Nutrient> nutrients) {
-        StringBuilder sb = new StringBuilder();
-        for (TheNutritionFactsService.NutrientInfo.Nutrient nutrient : nutrients) {
-            sb.append(nutrient.toString()).append(" ");
-        }
-        return sb.toString();
+        return new Recipe(recipe.name(), recipe.description(),recipe.ingredients(), recipe.instructions(), recipe.rating(),resp.calories, resp.healthLabels, resp.nutrients, resp.picture);
     }
 
     public List<Recipe> getAll() {

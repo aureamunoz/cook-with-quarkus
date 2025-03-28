@@ -37,4 +37,9 @@ public class Nutrient {
     public int hashCode() {
         return Objects.hash(getLabel(), getQuantity(), getUnit());
     }
+
+    @Override
+    public String toString() {
+        return label + ": " + quantity + " " + unit;
+    }
 }

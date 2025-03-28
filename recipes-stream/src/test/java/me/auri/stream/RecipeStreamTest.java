@@ -28,9 +28,7 @@ class RecipeStreamTest {
 
             System.out.println("Calorías: " + info.calories);
             System.out.println("Health Labels: " + info.healthLabels);
-            for (TheNutritionFactsService.NutrientInfo.Nutrient n : info.nutrients) {
-                System.out.println(n.label + ": " + n.quantity + n.unit);
-            }
+            System.out.println("Nutrients: " + info.nutrients);
         }
 
 

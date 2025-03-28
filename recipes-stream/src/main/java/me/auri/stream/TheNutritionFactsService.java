@@ -22,34 +22,19 @@ public interface TheNutritionFactsService {
     @Timeout(1000)
     NutrientInfo analyze(RecipeDetails nutritionQuery);
 
-    public class NutrientInfo {
+    class NutrientInfo {
 
         @JsonProperty("totalCalories")
         public int calories;
 
         @JsonProperty("healthLabels")
-        public List<String> healthLabels;
+        public String healthLabels;
 
         @JsonProperty("nutrients")
-        public List<Nutrient> nutrients;
+        public String nutrients;
 
         @JsonProperty("picture")
         public String picture;
 
-        public static class Nutrient {
-            @JsonProperty("label")
-            public String label;
-
-            @JsonProperty("quantity")
-            public double quantity;
-
-            @JsonProperty("unit")
-            public String unit;
-
-            @Override
-            public String toString() {
-                return label + ": " + quantity + " " + unit;
-            }
-        }
     }
 }
