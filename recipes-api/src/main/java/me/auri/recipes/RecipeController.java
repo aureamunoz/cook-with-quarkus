@@ -34,7 +34,7 @@ public class RecipeController {
     @PostMapping("/recipes")
     @Transactional
     public Recipe addRecipe(Recipe recipe) {
-        Log.infof("Adding a recipe: %s (rating: %d)", recipe.name, recipe.rating);
+        Log.infof("Adding a recipe: %s", recipe.name);
         recipe.persist();
         emitter.sendAndAwait(recipe);
         return recipe;
@@ -53,7 +53,7 @@ public class RecipeController {
         }
     }
 
-    @PostMapping("/new")
+    @PostMapping("/recipes/new")
     public Recipe cookSomethingWith(@RequestParam String ingredients){
         Log.infof("Cooking new recipe with: %s ", ingredients);
         return cookAiService.cookSomethingWith(ingredients);

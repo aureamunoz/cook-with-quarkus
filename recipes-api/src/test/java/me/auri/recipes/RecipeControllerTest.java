@@ -25,14 +25,12 @@ public class RecipeControllerTest {
         pancakes.name = "Pancakes";
         pancakes.description = "Receta fácil para hacer panqueques esponjosos.";
         pancakes.instructions = "Mezclar harina, huevos y leche. Cocinar en sartén.";
-        pancakes.rating = 5;
         pancakes.ingredients="Harina:200g, Huevo:2, Leche:250ml";
 
         Recipe omelette = new Recipe();
         omelette.name = "Omelette";
         omelette.description = "Delicioso omelette con huevo.";
         omelette.instructions = "Batir los huevos y cocinar en sartén.";
-        omelette.rating = 4;
         omelette.ingredients="Huevo:3";
 
 
