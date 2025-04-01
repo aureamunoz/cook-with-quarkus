@@ -30,17 +30,10 @@ public class RecipeStreamService {
         Log.infof("Received recipe %s", recipe.name());
 
         // Enrich, Store (title -> enriched) and send to updates if there is requests
-        Recipe enriched = enrich(recipe);
-        recipes.put(recipe.name(), enriched);
-
-        if (updates.hasRequests()) {
-            updates.sendAndForget(enriched);
-        }
     }
 
     private Recipe enrich(Recipe recipe) {
         var resp = service.analyze(new RecipeDetails(recipe.name(), recipe.ingredients()));
-        Log.infof(recipe.name() + " enriched: ");
         return new Recipe(recipe.name(), recipe.description(), recipe.ingredients(), recipe.instructions(),
                 recipe.rating(), resp.calories, resp.healthLabels, resp.nutrients, resp.picture);
     }
