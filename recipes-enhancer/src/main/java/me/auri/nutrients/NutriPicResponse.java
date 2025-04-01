@@ -44,10 +44,7 @@ public class NutriPicResponse {
     }
 
     public static enum HealthLabel {
-        VEGAN("Vegano"),
-        VEGETARIAN("Vegetariano"),
-        DAIRY_FREE("Sin lactosa"),
-        GLUTEN_FREE("Sin gluten"),
+        VEGAN("Vegano"), VEGETARIAN("Vegetariano"), DAIRY_FREE("Sin lactosa"), GLUTEN_FREE("Sin gluten"),
         NO_SUGAR_ADDED("Sin azúcares añadidos");
 
         private String label;

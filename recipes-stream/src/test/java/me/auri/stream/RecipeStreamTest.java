@@ -12,24 +12,20 @@ import static org.hamcrest.CoreMatchers.is;
 class RecipeStreamTest {
     @Test
     void testHelloEndpoint() {
-        given()
-          .when().get("/hello")
-          .then()
-             .statusCode(200)
-             .body(is("Hello from Quarkus REST"));
+        given().when().get("/hello").then().statusCode(200).body(is("Hello from Quarkus REST"));
     }
 
     @Test
     void testDeserializationJson() throws JsonProcessingException {
-            String json = "{ \"calories\": 742, \"healthLabels\": [\"VEGETARIAN\", \"VEGAN\"], \"nutrients\": [{\"label\": \"Carbohydrates\", \"quantity\": 149.4, \"unit\": \"g\"}, {\"label\": \"Fat\", \"quantity\": 3, \"unit\": \"g\"}, {\"label\": \"Protein\", \"quantity\": 26, \"unit\": \"g\"} ] }";
+        String json = "{ \"calories\": 742, \"healthLabels\": [\"VEGETARIAN\", \"VEGAN\"], \"nutrients\": [{\"label\": \"Carbohydrates\", \"quantity\": 149.4, \"unit\": \"g\"}, {\"label\": \"Fat\", \"quantity\": 3, \"unit\": \"g\"}, {\"label\": \"Protein\", \"quantity\": 26, \"unit\": \"g\"} ] }";
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            TheNutritionFactsService.NutrientInfo info = objectMapper.readValue(json, TheNutritionFactsService.NutrientInfo.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        TheNutritionFactsService.NutrientInfo info = objectMapper.readValue(json,
+                TheNutritionFactsService.NutrientInfo.class);
 
-            System.out.println("Calorías: " + info.calories);
-            System.out.println("Health Labels: " + info.healthLabels);
-            System.out.println("Nutrients: " + info.nutrients);
-        }
-
+        System.out.println("Calorías: " + info.calories);
+        System.out.println("Health Labels: " + info.healthLabels);
+        System.out.println("Nutrients: " + info.nutrients);
+    }
 
 }

@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @ApplicationScoped
-public class RecipeService {
+public class RecipeStreamService {
 
     // In-memory repository for demo purpose
     final Map<String, Recipe> recipes = new ConcurrentHashMap<>();
@@ -33,7 +33,7 @@ public class RecipeService {
         Recipe enriched = enrich(recipe);
         recipes.put(recipe.name(), enriched);
 
-        if(updates.hasRequests()) {
+        if (updates.hasRequests()) {
             updates.sendAndForget(enriched);
         }
     }
@@ -41,7 +41,8 @@ public class RecipeService {
     private Recipe enrich(Recipe recipe) {
         var resp = service.analyze(new RecipeDetails(recipe.name(), recipe.ingredients()));
         Log.infof(recipe.name() + " enriched: ");
-        return new Recipe(recipe.name(), recipe.description(),recipe.ingredients(), recipe.instructions(), recipe.rating(),resp.calories, resp.healthLabels, resp.nutrients, resp.picture);
+        return new Recipe(recipe.name(), recipe.description(), recipe.ingredients(), recipe.instructions(),
+                recipe.rating(), resp.calories, resp.healthLabels, resp.nutrients, resp.picture);
     }
 
     public List<Recipe> getAll() {

@@ -28,9 +28,12 @@ public class Nutrient {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Nutrient nutrient)) return false;
-        return Double.compare(getQuantity(), nutrient.getQuantity()) == 0 && Objects.equals(getLabel(), nutrient.getLabel()) && Objects.equals(getUnit(), nutrient.getUnit());
+        if (this == o)
+            return true;
+        if (!(o instanceof Nutrient nutrient))
+            return false;
+        return Double.compare(getQuantity(), nutrient.getQuantity()) == 0
+                && Objects.equals(getLabel(), nutrient.getLabel()) && Objects.equals(getUnit(), nutrient.getUnit());
     }
 
     @Override

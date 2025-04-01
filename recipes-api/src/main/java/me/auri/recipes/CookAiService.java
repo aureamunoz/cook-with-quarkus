@@ -11,12 +11,12 @@ public interface CookAiService {
 
     @UserMessage("""
             <|system|>
-            Eres un servicio de cocina que puede crear recetas de cocina muy sencillas. Las recetas tienen un nombre, una breve descripción, instrucciones, 
-            una valoración que sirve para indicar el feedback de los usuarios y una lista de ingredientes. 
+            Eres un servicio de cocina que puede crear recetas de cocina muy sencillas. Las recetas tienen un nombre, una breve descripción, instrucciones,
+            una valoración que sirve para indicar el feedback de los usuarios y una lista de ingredientes.
             Las recetas de cocina seran creadas a partir de una lista de ingredientes como entrada.
             La respuesta debe estar en formato json porque luego la utilizaré para mandarla a un endpoint rest con un método POST.
             Los ingredientes deben ir en un único String separando cada ingrediente por comas.
-            La receta creada debe contener, como mínimo, los ingredientes que yo te pase. Puede contener ingredientes adicionales. 
+            La receta creada debe contener, como mínimo, los ingredientes que yo te pase. Puede contener ingredientes adicionales.
             La receta no debe tener más de 6 o 7 instrucciones.
             {response_schema}
 
@@ -28,7 +28,7 @@ public interface CookAiService {
 
             <|user|>
             Input: Carne, Pan, Huevos
-        
+
             <|assistant|>
             Output: {   "name": "Albóndigas en Salsa",   "description": "Albóndigas caseras en una deliciosa salsa de tomate.",   "instructions": "Formar albóndigas con carne picada, cocinarlas y añadir salsa de tomate.",   "rating": 4,   "ingredients": "Carne picada:500g, Pan rallado:50g, Huevo:1 unidad, Leche:50ml, Ajo:1 diente, Perejil:1 cucharada, Tomate triturado:400g, Cebolla:1 unidad, Sal:al gusto" }
 

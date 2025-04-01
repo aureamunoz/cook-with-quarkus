@@ -27,7 +27,7 @@ public class RecipeController {
     CookAiService cookAiService;
 
     @GetMapping("/recipes")
-    public List<Recipe> getAll(){
+    public List<Recipe> getAll() {
         return Recipe.listAll();
     }
 
@@ -54,7 +54,7 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes/new")
-    public Recipe cookSomethingWith(@RequestParam String ingredients){
+    public Recipe cookSomethingWith(@RequestParam String ingredients) {
         Log.infof("Cooking new recipe with: %s ", ingredients);
         return cookAiService.cookSomethingWith(ingredients);
     }

@@ -15,4 +15,3 @@ public class Recipe extends PanacheEntity {
     public String instructions;
     public String ingredients; // Ej: "Harina:200g, Huevo:2, Leche:250ml"
 }
-
