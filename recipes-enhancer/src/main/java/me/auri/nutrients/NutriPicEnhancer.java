@@ -217,11 +217,13 @@ public class NutriPicEnhancer {
     }
 
     public String getPic(String recipeName) {
-        String base64 = convertImageToBase64(recipeName.toLowerCase().trim().replaceAll("\\s+", "") + ".jpg");
+        String imagePath = recipeName.toLowerCase().trim().replaceAll("\\s+", "") + ".jpg";
+        Log.infof("Looking for %s ", imagePath);
+        String base64 = convertImageToBase64(imagePath);
         if (!base64.isBlank()) {
-            Log.infof("Image found for ", recipeName);
+            Log.infof("%s found!", recipeName);
         } else {
-            Log.infof("Image for %s not found", recipeName);
+            Log.infof("%s not found", recipeName);
         }
         return base64;
 

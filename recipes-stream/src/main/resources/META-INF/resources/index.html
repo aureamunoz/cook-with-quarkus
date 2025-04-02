@@ -12,10 +12,22 @@
     <title>Mis Recetas de cocina</title>
 
     <style>
+        .left {
+            padding-top: 0;
+            margin-top: 0;
+            vertical-align: top;
+            width: 700px;
+            word-wrap: break-word; /* Rompe palabras largas */
+            white-space: normal; /* Permite saltos de línea */
+        }
         .right {
             padding-top: 0;
             margin-top: 0;
             vertical-align: top;
+            horiz-align: center;
+            width: 200px;
+            word-wrap: break-word;
+            white-space: normal;
         }
         table {
             border: none;
@@ -86,7 +98,7 @@
                         let healthLabels = document.createElement("p");
                         let nutrients = document.createElement("p");
                         let image = document.createElement("div");
-                        left.setAttribute("class", "right");
+                        left.setAttribute("class", "left");
                         right.setAttribute("class", "right");
                         name.innerHTML = "<strong style='color: #4695eb;'>" + recipe.name;
                         description.appendChild(document.createTextNode(recipe.description));
