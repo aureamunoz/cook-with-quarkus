@@ -22,22 +22,10 @@ A recipes-based demo to illustrate Quarkus 3.x features for Commit conf 2025
 
 ### Ejemplos de json recetas:
 {
-"name": "Pancakes",
-"description": "Deliciosos pancakes esponjosos ideales para el desayuno.",
-"instructions": "Mezclar harina, leche y huevo hasta obtener una masa homogénea. Cocinar en una sartén caliente hasta dorar por ambos lados.",
-"ingredients": "Harina:200g, Leche:250ml, Huevo:1 unidad, Azúcar:50g, Mantequilla:30g, Polvo de hornear:5g, Sal:1 pizca"
-}
-{
 "name": "Chili con Carne",
 "description": "Un plato picante y contundente de la cocina tex-mex.",
 "instructions": "Dorar la carne, añadir alubias y salsa de tomate. Cocinar a fuego lento con especias.",
 "ingredients": "Carne picada:500g, Alubias rojas:400g, Tomate triturado:300g, Cebolla:1 unidad, Ajo:2 dientes, Chile en polvo:1 cucharada, Comino:1 cucharadita, Sal:al gusto"
-}
-{
-"name": "Albondigas en Salsa",
-"description": "Albóndigas caseras en una deliciosa salsa de tomate.",
-"instructions": "Formar albóndigas con carne picada, cocinarlas y añadir salsa de tomate.",
-"ingredients": "Carne picada:500g, Pan rallado:50g, Huevo:1 unidad, Leche:50ml, Ajo:1 diente, Perejil:1 cucharada, Tomate triturado:400g, Cebolla:1 unidad, Sal:al gusto"
 }
 {
 "name": "Menestra de Verduras",
