@@ -5,10 +5,10 @@ import java.util.Objects;
 public class Nutrient {
 
     private String label;
-    private double quantity;
+    private float quantity;
     private String unit;
 
-    public Nutrient(String label, double quantity, String unit) {
+    public Nutrient(String label, float quantity, String unit) {
         this.label = label;
         this.quantity = quantity;
         this.unit = unit;
@@ -18,7 +18,7 @@ public class Nutrient {
         return label;
     }
 
-    public double getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
