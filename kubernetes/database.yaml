@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recipes-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: recipes-db
+  template:
+    metadata:
+      labels:
+        name: recipes-db
+    spec:
+      containers:
+        - envFrom:
+            - secretRef:
+                name: recipes-db-config
+          image: bitnami/postgresql:14
+          name: recipes-db
+          ports:
+            - containerPort: 5432
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              memory: 32Mi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: recipes-db
+  name: recipes-db-config
+data:
+  POSTGRESQL_DATABASE: cmVjaXBlcw==
+  POSTGRESQL_USERNAME: cmVjaXBlcw==
+  POSTGRESQL_PASSWORD: cmVjaXBlcw==
+type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: recipes-db
+    application: recipes-service
+  name: recipes-db
+spec:
+  ports:
+    - port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    name: recipes-db
+  type: ClusterIP
