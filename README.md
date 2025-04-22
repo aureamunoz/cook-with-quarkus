@@ -14,6 +14,7 @@ A recipes-based demo to illustrate Quarkus 3.x features for Commit conf 2025
 * Swagger UI - `recipes-api`
 * Arc (bean removal) - `recipes-api`
 * Native compilation - `recipes-api`
+* Deploy to OpenShift - `recipes-api`
 * Kafka consumption using virtual threads - `recipes-stream`
 * SSE - `recipes-stream`
 * REST Client - `recipes-stream`
@@ -81,6 +82,14 @@ A recipes-based demo to illustrate Quarkus 3.x features for Commit conf 2025
 "instructions": "Cocinar todas las verduras a fuego lento hasta que estén tiernas y el tomate reduzca.",
 "ingredients": "Calabacín:1 unidad, Berenjena:1 unidad, Pimiento rojo:1 unidad, Pimiento verde:1 unidad, Cebolla:1 unidad, Tomate triturado:500g, Aceite de oliva:50ml, Sal:al gusto"
 }
+
+# Deploy to OpenShift
+
+recipes-api:
+
+```shell
+quarkus deploy openshift --image-build -Dquarkus.openshift.route.expose=true -Dquarkus.profile=kubernetes
+```
 
 
 
