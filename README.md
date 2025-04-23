@@ -59,7 +59,7 @@ A recipes-based demo to illustrate Quarkus 3.x features for Commit conf 2025
 "ingredients": "Tomate:500g, Pimiento verde:1 unidad, Pepino:1 unidad, Ajo:1 diente, Pan:50g, Aceite de oliva:30ml, Vinagre:15ml, Sal:al gusto"
 }
 {
-"name": "Croquetas de Jamón",
+"name": "Croquetas de Jamon",
 "description": "Crujientes croquetas caseras con un cremoso interior de jamón.",
 "instructions": "Preparar una bechamel con jamón picado, dejar enfriar, formar las croquetas, empanar y freír.",
 "ingredients": "Jamón serrano:100g, Harina:100g, Mantequilla:50g, Leche:500ml, Huevo:1 unidad, Pan rallado:100g, Aceite para freír:500ml, Sal:al gusto"
