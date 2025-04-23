@@ -106,7 +106,6 @@
                         image.innerHTML="<img src='data:image/jpg;base64,"+recipe.image+"'/>";
                         ingredients.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Ingredientes:</span> " + recipe.ingredients;
                         instructions.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Instrucciones:</span> " + recipe.instructions;
-                        ranking.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Valoración:</span> " + recipe.rating;
                         totalCalories.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Calorías:</span> " + recipe.calories;
                         nutrients.innerHTML = "<span style='color: #ff004a; font-weight: bold;'>Información nutricional:</span><br>" + recipe.nutrients;
                         healthLabels.appendChild(document.createTextNode( recipe.healthLabels));
@@ -114,7 +113,6 @@
                         left.appendChild(description);
                         left.appendChild(ingredients);
                         left.appendChild(instructions);
-                        left.appendChild(ranking);
                         left.appendChild(totalCalories);
                         left.appendChild(healthLabels);
                         left.appendChild(nutrients);

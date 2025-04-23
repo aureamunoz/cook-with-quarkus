@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/recipes")
 @RunOnVirtualThread
 public class RecipeController {
 
@@ -26,12 +28,12 @@ public class RecipeController {
     @Inject
     CookAiService cookAiService;
 
-    @GetMapping("/recipes")
+    @GetMapping
     public List<Recipe> getAll() {
         return Recipe.listAll();
     }
 
-    @PostMapping("/recipes")
+    @PostMapping
     @Transactional
     public Recipe addRecipe(Recipe recipe) {
         Log.infof("Adding a recipe: %s", recipe.name);
@@ -40,7 +42,7 @@ public class RecipeController {
         return recipe;
     }
 
-    @DeleteMapping("/recipes/{id}")
+    @DeleteMapping("/{id}")
     @Transactional
     public Response deleteRecipe(@PathVariable Long id) {
         Log.infof("Deleting a recipe with id: %d", id);
@@ -53,7 +55,7 @@ public class RecipeController {
         }
     }
 
-    @PostMapping("/recipes/new")
+    @PostMapping("/new")
     public Recipe cookSomethingWith(@RequestParam String ingredients) {
         Log.infof("Cooking new recipe with: %s ", ingredients);
         return cookAiService.cookSomethingWith(ingredients);
