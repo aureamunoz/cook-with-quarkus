@@ -13,7 +13,7 @@ class RecipeStreamTest {
 
     @Test
     void testDeserializationJson() throws JsonProcessingException {
-        String json = "{ \"totalCalories\": 742, \"healthLabels\": \"VEGETARIAN, VEGAN\"], \"nutrients\":\"Grasas: 60.8 g Hidratos de Carbono: 151.6 g Proteinas: 68.4 g\"}, \"picture\":\"0943853kjfñljhflkfj4375349uroweiuro\" }";
+        String json = "{ \"totalCalories\": 742, \"healthLabels\": \"VEGETARIAN, VEGAN\", \"nutrients\":\"Grasas: 60.8 g Hidratos de Carbono: 151.6 g Proteinas: 68.4 g\", \"picture\":\"0943853kjfñljhflkfj4375349uroweiuro\" }";
 
         ObjectMapper objectMapper = new ObjectMapper();
         TheNutritionFactsService.NutrientInfo info = objectMapper.readValue(json,
