@@ -10,14 +10,10 @@ import static org.hamcrest.CoreMatchers.is;
 
 @QuarkusTest
 class RecipeStreamTest {
-    @Test
-    void testHelloEndpoint() {
-        given().when().get("/hello").then().statusCode(200).body(is("Hello from Quarkus REST"));
-    }
 
     @Test
     void testDeserializationJson() throws JsonProcessingException {
-        String json = "{ \"calories\": 742, \"healthLabels\": [\"VEGETARIAN\", \"VEGAN\"], \"nutrients\": [{\"label\": \"Carbohydrates\", \"quantity\": 149.4, \"unit\": \"g\"}, {\"label\": \"Fat\", \"quantity\": 3, \"unit\": \"g\"}, {\"label\": \"Protein\", \"quantity\": 26, \"unit\": \"g\"} ] }";
+        String json = "{ \"totalCalories\": 742, \"healthLabels\": \"VEGETARIAN, VEGAN\"], \"nutrients\":\"Grasas: 60.8 g Hidratos de Carbono: 151.6 g Proteinas: 68.4 g\"}, \"picture\":\"0943853kjfñljhflkfj4375349uroweiuro\" }";
 
         ObjectMapper objectMapper = new ObjectMapper();
         TheNutritionFactsService.NutrientInfo info = objectMapper.readValue(json,
