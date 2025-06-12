@@ -1,0 +1,18 @@
+version: 2
+updates:
+  #  Main branch
+  - package-ecosystem: maven
+    directory: "/recipes-api"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+  - package-ecosystem: maven
+    directory: "/recipes-enhancer"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+  - package-ecosystem: maven
+    directory: "/recipes-stream"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10

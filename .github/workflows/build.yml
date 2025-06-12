@@ -1,0 +1,43 @@
+name: Build
+
+env:
+  JVM_VERSION: '21'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - recipes-api
+          - recipes-enhancer
+          - recipes-stream
+
+    name: "Build ${{ matrix.app }}"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JVM_VERSION }}
+          distribution: temurin
+          cache: maven
+
+      - name: Maven Build for ${{ matrix.app }}
+        working-directory: ${{ matrix.app }}
+        run: ./mvnw -B clean install -Dquarkus.http.host=0.0.0.0 -DskipITs=false
