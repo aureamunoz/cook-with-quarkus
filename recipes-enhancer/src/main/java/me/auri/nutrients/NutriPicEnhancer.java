@@ -5,6 +5,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -238,20 +240,17 @@ public class NutriPicEnhancer {
     }
 
     private String convertImageToBase64(String imagePath) {
-        try {
-            URL resource = Thread.currentThread().getContextClassLoader().getResource(imagePath);
-            if (resource != null) {
-                File imageFile = new File(resource.toURI());
-                if (imageFile.exists()) {
-                    byte[] imageData = Files.readAllBytes(imageFile.toPath());
-                    return Base64.getEncoder().encodeToString(imageData);
-
-                }
+        try (InputStream is = getClass().getResourceAsStream("/" + imagePath)) {
+            if (is == null) {
+                Log.warnf("Image %s not found in resources", imagePath);
+                return "";
             }
-        } catch (Exception e) {
+            byte[] bytes = is.readAllBytes();
+            return Base64.getEncoder().encodeToString(bytes);
+        } catch (IOException e) {
             Log.errorf("Error processing image file %s: %s", imagePath, e.getMessage());
+            return "";
         }
-        return "";
     }
 
     public List<NutritionalFacts> getAll() {
