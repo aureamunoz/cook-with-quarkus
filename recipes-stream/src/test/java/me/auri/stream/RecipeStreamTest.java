@@ -1,7 +1,7 @@
 package me.auri.stream;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +12,10 @@ import static org.hamcrest.CoreMatchers.is;
 class RecipeStreamTest {
 
     @Test
-    void testDeserializationJson() throws JsonProcessingException {
+    void testDeserializationJson() {
         String json = "{ \"totalCalories\": 742, \"healthLabels\": \"VEGETARIAN, VEGAN\", \"nutrients\":\"Grasas: 60.8 g Hidratos de Carbono: 151.6 g Proteinas: 68.4 g\", \"picture\":\"0943853kjfñljhflkfj4375349uroweiuro\" }";
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new JsonMapper();
         TheNutritionFactsService.NutrientInfo info = objectMapper.readValue(json,
                 TheNutritionFactsService.NutrientInfo.class);
 
